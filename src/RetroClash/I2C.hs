@@ -1,14 +1,26 @@
-{-# LANGUAGE StandaloneDeriving, LambdaCase #-}
+{-# LANGUAGE StandaloneDeriving, LambdaCase, UndecidableInstances #-}
 {-# OPTIONS_GHC -fconstraint-solver-iterations=10 #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Extra.Solver #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.KnownNat.Solver #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Normalise #-}
+
 module RetroClash.I2C (i2cMaster) where
 
 import Clash.Prelude
 import RetroClash.Utils
 import RetroClash.Clock
+import Control.Monad (when)
 import Control.Monad.State
 import Data.Maybe (isJust, isNothing)
 
 type Message = (BitVector 8, BitVector 8, BitVector 8)
+
+data SendBits n
+    = SendBit SendTransition (BitVector n) (Index n)
+    | SendAck SendTransition
+    deriving (Show, Generic, NFDataX)
+deriving instance (KnownNat n, 1 <= n) => BitPack (SendBits n)
+
 
 data MessageState
     = Init        (BitVector 8, BitVector 8, BitVector 8) Init
@@ -18,11 +30,6 @@ data MessageState
     | Teardown                                            Teardown
     deriving (Show, Generic, BitPack, NFDataX)
 
-data SendBits n
-    = SendBit SendTransition (BitVector n) (Index n)
-    | SendAck SendTransition
-    deriving (Show, Generic, NFDataX)
-deriving instance (KnownNat n, 1 <= n) => BitPack (SendBits n)
 
 data SendTransition = SDASet | Tick
   deriving (Show, Enum, Bounded, Eq, Generic, BitPack, NFDataX)

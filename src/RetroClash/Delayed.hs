@@ -1,4 +1,5 @@
 {-# LANGUAGE RecordWildCards, RankNTypes #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Extra.Solver -fplugin GHC.TypeLits.KnownNat.Solver #-}
 module RetroClash.Delayed
     ( delayVGA
 
@@ -60,7 +61,7 @@ delayedRom
 delayedRom syncRom addr = unsafeFromSignal $ syncRom (toSignal addr)
 
 delayedBlockRam1
-    :: (1 <= n, Enum addr, NFDataX a, HiddenClockResetEnable dom)
+    :: (1 <= n, Enum addr, NFDataX a, NFDataX addr, HiddenClockResetEnable dom)
     => ResetStrategy r
     -> SNat n
     -> a

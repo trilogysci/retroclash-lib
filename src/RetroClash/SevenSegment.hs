@@ -1,5 +1,7 @@
 {-# LANGUAGE PartialTypeSignatures, RecordWildCards, ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-partial-type-signatures #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Extra.Solver -fplugin GHC.TypeLits.KnownNat.Solver #-}
+
 module RetroClash.SevenSegment
     ( SevenSegment(..)
     , encodeHexSS

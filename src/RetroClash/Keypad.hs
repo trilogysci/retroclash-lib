@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Extra.Solver -fplugin GHC.TypeLits.KnownNat.Solver #-}
 module RetroClash.Keypad
     ( Matrix(..), KeyStates(..), KeyEvent(..), KeyEvents(..)
     , scanKeypad, keypadEvents

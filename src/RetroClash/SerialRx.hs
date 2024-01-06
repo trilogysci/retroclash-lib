@@ -13,6 +13,7 @@ import RetroClash.Clock
 
 import Control.Monad.State
 import Control.Monad.Trans.Writer
+import Control.Monad (when)
 import Data.Monoid
 import Data.Word
 

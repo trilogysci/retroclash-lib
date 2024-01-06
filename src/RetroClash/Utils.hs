@@ -1,5 +1,8 @@
 {-# LANGUAGE ScopedTypeVariables, ApplicativeDo, Rank2Types #-}
 {-# LANGUAGE TupleSections #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Extra.Solver #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.KnownNat.Solver #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Normalise #-}
 module RetroClash.Utils
     ( withResetEnableGen
     , withEnableGen
@@ -76,6 +79,7 @@ import Clash.Prelude
 import RetroClash.Clock
 import Data.Maybe (fromMaybe)
 import Control.Monad.State
+import Control.Monad (guard)
 import qualified Data.Foldable as F
 import Data.Monoid
 

@@ -1,4 +1,7 @@
 {-# OPTIONS_GHC -fconstraint-solver-iterations=5 #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Extra.Solver #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.KnownNat.Solver #-}
+{-# OPTIONS_GHC -fplugin GHC.TypeLits.Normalise #-}
 module RetroClash.BCD
     ( Digit, toDigit
     , BCD

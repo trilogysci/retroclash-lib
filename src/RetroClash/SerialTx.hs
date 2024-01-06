@@ -14,8 +14,10 @@ import RetroClash.Clock
 
 import Control.Monad.State
 import Control.Monad.Writer
+import Control.Monad (mplus)
 import Data.Foldable (traverse_)
 import Data.Word
+import Data.Monoid (getAny, Any(..))
 
 data TxState n
     = TxIdle

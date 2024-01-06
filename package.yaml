@@ -1,5 +1,5 @@
 name:                retroclash-lib
-version:             0.1.2.1
+version:             0.1.2.2
 category:            Hardware
 synopsis:            Code shared across the code samples in the book "Retrocomputing with Clash"
 description: |
@@ -34,31 +34,33 @@ copyright:           2021 Gergő Érdi
 
 dependencies:
   - base >= 4.14 && < 5
-  - clash-prelude ^>= 1.4.2 || ^>= 1.6.1
-  - clash-lib  ^>= 1.4.2 || ^>= 1.6.1
-  - clash-ghc ^>= 1.4.2 || ^>= 1.6.1
+  - clash-prelude
+  - clash-lib
+  - clash-ghc
   - ghc-typelits-natnormalise
   - ghc-typelits-extra
   - ghc-typelits-knownnat
 
   - mtl
   - transformers
-  - barbies ^>= 2.0.1
+  - barbies
   - lens
   - containers
   - template-haskell
   - th-orphans >= 0.13.11
   - lift-type ^>= 0.1
-  - monoidal-containers ^>= 0.6
+  - monoidal-containers
 
 source-dirs:
   - src
 
 ghc-options:
   -fexpose-all-unfoldings -fno-worker-wrapper
-  -fplugin GHC.TypeLits.KnownNat.Solver
-  -fplugin GHC.TypeLits.Normalise
-  -fplugin GHC.TypeLits.Extra.Solver
+# for whatever reason now getting errors ghci can't locate these
+# but work within the files individual files
+# -fplugin GHC.TypeLits.KnownNat.Solver
+# -fplugin GHC.TypeLits.Normalise
+# -fplugin GHC.TypeLits.Extra.Solver
 
 # Anything that Clash uses by default should go here
 default-extensions:
@@ -81,13 +83,13 @@ default-extensions:
   - NoStarIsType
   - NoStrictData
   - NoStrict
+  - PolyKinds
   - QuasiQuotes
   - ScopedTypeVariables
   - TemplateHaskellQuotes
   - TemplateHaskell
   - TypeApplications
   - TypeFamilies
-  - TypeInType
   - TypeOperators
 
 library:
